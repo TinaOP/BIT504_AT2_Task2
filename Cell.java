@@ -1,4 +1,7 @@
 import java.awt.BasicStroke;
+
+
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -43,20 +46,12 @@ public class Cell {
 		}
 	}
 	
-	//declare states of cell content
-    public enum Content {
-        EMPTY,
-        CROSS,
-        NOUGHT
-    }
     
-    //redundant? there is issue between content content and content.empty
-    private Content content;
 	
 	/** Set this cell's content to EMPTY */
 	public void clear() {
 		// Set the value of content to Empty
-		this.content = Content.EMPTY;
+		content = Player.Empty;
 		
 	}
 		
