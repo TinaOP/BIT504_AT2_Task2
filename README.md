@@ -1,1 +1,1 @@
-Part of a tic tac toe game
+Completed tic tac toe game
