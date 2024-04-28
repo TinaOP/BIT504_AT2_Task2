@@ -1,1 +1,1 @@
-Second adjusment ofcode for a tic tac toe game
+Part of a tic tac toe game
