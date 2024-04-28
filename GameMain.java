@@ -26,8 +26,15 @@ public class GameMain extends JPanel implements MouseListener{
 	// the game board 
 	private Board board;
 	 	 
-	//TODO: create the enumeration for the variable below (GameState currentState)
+	//Create the enumeration for the variable below (GameState currentState)
 	//HINT all of the states you require are shown in the code within GameMain
+	public enum GameState {
+		Playing,
+		DRAW,
+	    CROSS_WON,
+	    NOUGHT_WON
+	}
+	
 	private GameState currentState; 
 	
 	// the current player
@@ -94,24 +101,25 @@ public class GameMain extends JPanel implements MouseListener{
 		//set status bar message
 		if (currentState == GameState.Playing) {          
 			statusBar.setForeground(Color.BLACK);          
-			if (currentPlayer == Player.Cross) {   
-			
-				//TODO: use the status bar to display the message "X"'s Turn
-
+			if (currentPlayer == Player.Cross) {
+				//use status bar to display the message "X"'s turn
+				statusBar.setForeground(Color.RED);          
+				statusBar.setText("X's turn.");
 				
-			} else {    
-				
-				//TODO: use the status bar to display the message "O"'s Turn
+			} else if (currentPlayer == Player.Nought) {
+				//use status bar to display the message "O"'s turn
+				statusBar.setForeground(Color.RED);          
+				statusBar.setText("O's turn.");{    
 
 				
 			}       
-			} else if (currentState == GameState.Draw) {          
+			} else if (currentState == GameState.DRAW) {          
 				statusBar.setForeground(Color.RED);          
 				statusBar.setText("It's a Draw! Click to play again.");       
-			} else if (currentState == GameState.Cross_won) {          
+			} else if (currentState == GameState.CROSS_WON) {          
 				statusBar.setForeground(Color.RED);          
 				statusBar.setText("'X' Won! Click to play again.");       
-			} else if (currentState == GameState.Nought_won) {          
+			} else if (currentState == GameState.NOUGHT_WON) {          
 				statusBar.setForeground(Color.RED);          
 				statusBar.setText("'O' Won! Click to play again.");       
 			}
@@ -137,19 +145,23 @@ public class GameMain extends JPanel implements MouseListener{
 		 *   
 		 */
 		public void updateGame(Player thePlayer, int row, int col) {
-			//check for win after play
+			//check for win after each play
 			if(board.hasWon(thePlayer, row, col)) {
-				
-				// TODO: check which player has won and update the currentstate to the appropriate gamestate for the winner
+				//check which is theplayer, update currentstate to either cross_won or nought_won 
+				if (thePlayer == Player.Cross) {
+					currentState = GameState.CROSS_WON;
+				} else {
+					currentState = GameState.NOUGHT_WON;
+				}
 
-				
-			} else 
-				if (board.isDraw ()) {
-					
-				// TODO: set the currentstate to the draw gamestate
+				//If neither player has won but all cells are filled, update currentstate to draw
+			} else if (board.isDraw ()) {
+					currentState = GameState.DRAW;
 
-			}
-			//otherwise no change to current state of playing
+		    } else {
+		        // Otherwise, no change to current state of playing
+		        currentState = GameState.Playing;
+		    }
 		}
 		
 				

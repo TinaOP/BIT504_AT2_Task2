@@ -5,19 +5,20 @@ import java.awt.Graphics2D;
 
 public class Cell {
     //content of this cell (empty, cross, nought)
+	//issue with player content
 	Player content;
 	//row and column of this cell
 	int row, col;
 	
 	/** Constructor to initialise this cell with the specified row and col */
 	public Cell(int row, int col) {
-		
-		// TODO: Initialise the variables row, col 
+		//Initialise the variables row, col 
+		this.row = row;
+		this.col = col;
 
-		
-		
-		//TODO: call the method that sets the cell content to EMPTY
-		 
+		//call the method that sets the cell content to EMPTY
+		clear();
+
 	}
 	
 
@@ -42,11 +43,20 @@ public class Cell {
 		}
 	}
 	
+	//declare states of cell content
+    public enum Content {
+        EMPTY,
+        CROSS,
+        NOUGHT
+    }
+    
+    //redundant? there is issue between content content and content.empty
+    private Content content;
+	
 	/** Set this cell's content to EMPTY */
 	public void clear() {
-		
-		// TODO: Set the value of content to Empty (Remember this is an enum)
-
+		// Set the value of content to Empty
+		this.content = Content.EMPTY;
 		
 	}
 		
